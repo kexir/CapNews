@@ -1,0 +1,74 @@
+default:
+ common:
+  mongodb:
+   MONGO_DB_HOST: localhost
+   MONGO_DB_PORT: 27017
+   DB_NAME: tap-news
+   NEWS_TABLE_NAME: news
+   CLICK_LOGS_TABLE_NAME: click_logs
+   PREFERENCE_MODEL_TABLE_NAME: user_preference_model
+
+  cloudAMQP:
+   LOG_CLICKS_TASK_QUEUE_URL: amqp://gqgqwbld:3tT-Mc98TGLAMDQhFGw7CVe5hofSdrMv@donkey.rmq.cloudamqp.com/gqgqwbld
+   LOG_CLICKS_TASK_QUEUE_NAME: tap-news-log-clicks-task-queue
+   DEDUPE_NEWS_TASK_QUEUE_URL: amqp://xwcmarix:J-FdVhJrm8gQzu96-JWt9KG0areIjHH_@donkey.rmq.cloudamqp.com/xwcmarix
+   DEDUPE_NEWS_TASK_QUEUE_NAME: tap-news-dedupe-news-queue
+   SCRAPE_NEWS_TASK_QUEUE_URL: amqp://ninqtpra:_HP7oGhlOjZ8zO9u2PFAueJJFkhs7ljs@donkey.rmq.cloudamqp.com/ninqtpra
+   SCRAPE_NEWS_TASK_QUEUE_NAME: tap-news-scrape-news-queue
+   DEDUPE_SLEEP_TIME_IN_SECONDS: 1
+   FETCHER_SLEEP_IN_SECOND: 5
+   MONITOR_SLEEP_IN_SECOND: 10
+   socket_timeout: 3
+  news_api_client:
+   NEWS_API_ENDPOINT: https://newsapi.org/v1/
+   NEWS_API_KEY: 3adf6d25711b454daf92ce1325dd0d9f
+   ARTICLES_API: articles
+   SORT_BY_TOP: top
+   DEFAULT_SOURCES:
+    - bbc-news
+    - bbc-sport
+    - bloomberg
+    - cnn
+    - entertainment-weekly
+    - espn
+    - ign
+    - techcrunch
+    - the-new-york-times
+    - the-wall-street-journal
+    - the-washington-post
+ news_topic_modeling_server:
+  URL: http://localhost:6060/
+  host: localhost
+  port: 6060
+  MODEL_UPDATE_LAG_IN_SECONDS: 10
+  N_CLASSES: 17
+  MAX_DOCUMENT_LENGTH: 500
+ news_recommendation_server:
+  URL: http://localhost:5050/
+  host: localhost
+  port: 5050
+ backend_server:
+   host: localhost
+   port: 4040
+   NEWS_LIMIT: 100
+   NEWS_LIST_BATCH_SIZE: 10
+ supervisor_server:
+  host: localhost
+  port: 7070
+ redis-server:
+  host: localhost
+  port: 6379
+  USER_NEWS_TIME_OUT_IN_SECONDS: 60
+  NEWS_TIME_OUT_IN_SECOND: 3600*24
+ web_server:
+  RpcServerConfig: http://localhost:4040/
+  NewsPanelConfig: http://localhost:3000/news/userId/
+development:
+  database: myapp_development
+  adapter:  postgres
+  host:     localhost
+
+test:
+  database: myapp_test
+  adapter:  postgres
+  host:     localhost

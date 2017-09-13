@@ -1,0 +1,8 @@
+# Created by .ignore support plugin (hsz.mobi)
+web_server/client/node_modules
+web_server/server/node_modules
+
+.idea
+.ipynb_checkpoints
+
+web_server/server/public/
